@@ -28,11 +28,6 @@ public class FichaNave {
         double combustibleActual = 1450.75; 
         boolean sistemasListos = true; 
 
-        // Validación interna de rangos (Simulación de control de seguridad del sistema)
-        if (combustibleActual < 0 || nivelExperiencia < 0) {
-            System.out.println("⚠️ ALERTA: Rangos de datos inválidos detectados.");
-        }
-
 
         /*
          * IMPORTANCIA DE LAS CONSTANTES:
