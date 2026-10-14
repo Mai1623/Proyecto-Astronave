@@ -61,6 +61,7 @@ public class FichaNave {
         System.out.println("Porcentaje del tanque: " + porcentajeTanque + "%");
         System.out.println("Autonomía calculada (entera): " + años_luz_entero + " años luz.");
         System.out.println("Autonomía calculada (decimales): " + anosLuz + " años luz.");
+        System.out.println("Combustible sobrante: " + combustibleSobranteVuelta);
             System.out.println("===============================================================");
     }
     
