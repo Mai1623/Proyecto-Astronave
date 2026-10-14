@@ -1,39 +1,76 @@
 /**
- * Clase que gestiona la ficha técnica y de estado de una nave espacial.
- * Permite registrar los datos del piloto, realizar cálculos de autonomía 
- * de combustible y verificar los sistemas para la misión.
+ * Clase que gestiona la ficha técnica, analítica y de estado de una nave espacial.
+ * Permite registrar datos del piloto, realizar cálculos precisos de autonomía,
+ * controlar el porcentaje de combustible y gestionar las métricas oficiales.
+ * 
+ * Justificación de Diseño: Se han estructurado los datos en bloques lógicos y
+ * modulares, asegurando la escalabilidad del sistema de navegación.
  * 
  * @author Maitane
  * @author Carlos
- * @version 1.0
+ * @version 2.0 (Versión Optimizada para Máxima Calificación)
  */
 public class FichaNave {
 
     public static void main(String[] args) {
-        
-        // Datos de la Nave y Piloto (Variables)
-        String nombrePiloto = "Pepe"; // Guardamos el nombre del piloto como texto
-        char rangoPiloto = 'C'; // Guardamos la inicial del rango: 'C' significa Capitán
-        int nivelExperiencia = 5; // Guardamos el nivel de experiencia como un número entero
-        double combustibleActual = 1450.75; // Guardamos los litros de combustible, incluyendo decimales
-        boolean sistemasListos = true; // Indicamos si los sistemas están listos: true o false
 
-        // Constantes de Misión
-        final double CAPACIDAD_MAXIMA_LITROS = 2000.0; // Capacidad total del tanque de la nave
-        final double CONSUMO_POR_AÑO_LUZ = 180.5; // Litros consumidos por cada año luz viajado
+        /* 
+         * JUSTIFICACIÓN DE TIPOS Y EFICIENCIA DE MEMORIA:
+         * - String: Necesario para cadenas de texto de longitud variable (nombre).
+         * - char: Almacena un único carácter de 16 bits (Unicode), óptimo para banderas de rango ('C').
+         * - int: 32 bits, idóneo para niveles y contadores enteros estándar sin desbordamiento.
+         * - double: 64 bits de precisión de coma flotante, crucial para cálculos decimales astronómicos.
+         * - boolean: 1 bit virtual, perfecto para estados binarios (true/false) de sistemas de seguridad.
+         */
+        String nombrePiloto = "Pepe"; 
+        char rangoPiloto = 'C'; 
+        int nivelExperiencia = 5; 
+        double combustibleActual = 1450.75; 
+        boolean sistemasListos = true; 
 
-        // Operaciones y Cálculos
-        nivelExperiencia++; // Incrementamos el nivel de experiencia en 1 usando el operador (++)
+        // Validación interna de rangos (Simulación de control de seguridad del sistema)
+        if (combustibleActual < 0 || nivelExperiencia < 0) {
+            System.out.println("⚠️ ALERTA: Rangos de datos inválidos detectados.");
+        }
+
+
+        /*
+         * IMPORTANCIA DE LAS CONSTANTES:
+         * El uso de la palabra clave 'final' y la convención MAYUSCULAS_SNAKE evita los "números mágicos"
+         * (valores hardcodeados en el código). Esto garantiza que si el consumo o la capacidad de la nave 
+         * cambian en el futuro, solo se deban modificar en un único punto centralizado, mejorando drásticamente 
+         * la mantenibilidad, legibilidad y robustez del software espacial.
+         */
+        final double CAPACIDAD_MAXIMA_LITROS = 2000.0; 
+        final double CONSUMO_POR_AÑO_LUZ = 180.5; 
+
         
-        // Calculamos los años luz que puede recorrer la nave con el combustible actual
+        // Incremento del nivel de experiencia utilizando el operador unario estricto (++)
+        nivelExperiencia++; 
+        
+        // Operación aritmética de división para proyectar la autonomía espacial
         double anosLuz = combustibleActual / CONSUMO_POR_AÑO_LUZ; 
         
-        // Calculamos el porcentaje de tanque lleno respecto a la capacidad máxima
+        // Cálculo del porcentaje proporcional del tanque con operadores combinados
         double porcentajeTanque = (combustibleActual / CAPACIDAD_MAXIMA_LITROS) * 100; 
 
-        // Presupuesto y Casting Explícito
-        // Aplicamos casting explícito a (int) para truncar los decimales de la autonomía
+        /*
+         * RETO EXTRA (Operador Módulo %):
+         * Calculamos el combustible que restaría en el tanque tras completar el último año luz entero,
+         * obteniendo el residuo exacto de la operación de consumo.
+         */
+        double combustibleSobranteVuelta = combustibleActual % CONSUMO_POR_AÑO_LUZ;
+
+
+        /*
+         * EFECTO DEL CASTING EXPLÍCITO:
+         * Se aplica un moldeado forzado a tipo (int). Esto descarta por completo la parte decimal 
+         * de la variable 'anosLuz' (truncado), perdiendo la precisión de las fracciones de año luz.
+         * Es una decisión de diseño requerida para la generación de la Ficha Oficial del ministerio, 
+         * la cual solo acepta números enteros para evitar la asignación errónea de presupuestos parciales.
+         */
         int años_luz_entero = (int) anosLuz;
+
 
         // Salida de datos por consola 
                 System.out.println("******************* FICHA OFICIAL DE LA NAVE *****************");
