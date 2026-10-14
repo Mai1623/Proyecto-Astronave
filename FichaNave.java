@@ -19,8 +19,7 @@ public class FichaNave {
         int nivelExperiencia = 5; 
         double combustibleActual = 1450.75; 
         boolean sistemasListos = true; 
-
-
+         /*
         Utilizamos contantes.
          */
         final double CAPACIDAD_MAXIMA_LITROS = 2000.0; 
